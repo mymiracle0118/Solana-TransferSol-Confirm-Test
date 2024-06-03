@@ -14,7 +14,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
           <Head>
-            <title>BlackList</title>
+            <title>Test Send</title>
           </Head>
 
           <ContextProvider>

@@ -12,8 +12,7 @@ import pkg from '../../../package.json';
 
 // Store
 import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
-import { CreateToken } from 'components/CreateToken';
-import { UpdateMetadata } from 'components/UpdateMetadata';
+import { SendSol } from 'components/SendSol';
 
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
@@ -34,12 +33,12 @@ export const HomeView: FC = ({ }) => {
     <div className="md:hero mx-auto p-4">
       <div className="md:hero-content flex flex-col">
         <h1 className="text-center text-5xl font-bold text-transparent bg-clip-text text-purple-800">
-          Token Creator
+          Test Send
         </h1>      
         <div className="text-center">
-          <RequestAirdrop  my-2/>
-          {wallet && <p className='text-purple-800 '>SOL Balance: {(balance || 0).toLocaleString()}</p>}
-          <CreateToken />
+          {/* <RequestAirdrop  my-2/>
+          {wallet && <p className='text-purple-800 '>SOL Balance: {(balance || 0).toLocaleString()}</p>} */}
+          <SendSol />
         </div>
       </div>
     </div>
