@@ -21,8 +21,6 @@ export const SendSol: FC = () => {
         return;
       }
       let signature: TransactionSignature = '';
-      const amount = BigInt(form.amount * Math.pow(10, form.decimals));
-      console.log(amount)
       try {
         // Add transfer instruction to transaction
         const receivePubKey = new PublicKey(receiveAddress);
@@ -34,8 +32,20 @@ export const SendSol: FC = () => {
             })
         );
         
+        console.log(receiveAddress);
         signature = await sendTransaction(transaction, connection, {signers: []});
         notify({ type: 'success', message: 'Transaction successful!', txid: signature });
+
+        const resData = await fetch('/api/hello', {
+          method: 'POST',
+          body: JSON.stringify({
+            signature
+          })
+        });
+
+        const data = await resData.json();
+
+        console.log(data)
         
       } catch (error: any) {
           notify({ type: 'error', message: `Transaction failed!`, description: error?.message, txid: signature });
