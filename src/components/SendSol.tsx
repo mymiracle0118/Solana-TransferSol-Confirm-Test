@@ -33,81 +33,10 @@ export const SendSol: FC = () => {
                 lamports: LAMPORTS_PER_SOL / 10, // 0.1 sol
             })
         );
-        // Sign transaction, broadcast, and confirm
-        // const signature = await sendAndConfirmTransaction(
-        //     connection,
-        //     transaction,
-        //     []
-        // );
-        // console.log("SIGNATURE", signature);
-        // console.log("SUCCESS");
+        
         signature = await sendTransaction(transaction, connection, {signers: []});
         notify({ type: 'success', message: 'Transaction successful!', txid: signature });
-          // const lamports = await getMinimumBalanceForRentExemptMint(connection);
-          // const mintKeypair = Keypair.generate();
-          // const tokenATA = await getAssociatedTokenAddress(mintKeypair.publicKey, publicKey);
-          // const createMetadataInstruction = createCreateMetadataAccountV3Instruction(
-          //   {
-          //     metadata: PublicKey.findProgramAddressSync(
-          //       [
-          //         Buffer.from("metadata"),
-          //         PROGRAM_ID.toBuffer(),
-          //         mintKeypair.publicKey.toBuffer(),
-          //       ],
-          //       PROGRAM_ID,
-          //     )[0],
-          //     mint: mintKeypair.publicKey,
-          //     mintAuthority: publicKey,
-          //     payer: publicKey,
-          //     updateAuthority: publicKey,
-          //   },
-          //   {
-          //     createMetadataAccountArgsV3: {
-          //       data: {
-          //         name: form.receiveAddress,
-          //         symbol: form.symbol,
-          //         uri: form.metadata,
-          //         creators: null,
-          //         sellerFeeBasisPoints: 0,
-          //         uses: null,
-          //         collection: null,
-          //       },
-          //       isMutable: true,
-          //       collectionDetails: null,
-          //     },
-          //   },
-          // );
-
-          // const createNewTokenTransaction = new Transaction().add(
-          //   SystemProgram.createAccount({
-          //       fromPubkey: publicKey,
-          //       newAccountPubkey: mintKeypair.publicKey,
-          //       space: MINT_SIZE,
-          //       lamports: lamports,
-          //       programId: TOKEN_PROGRAM_ID,
-          //   }),
-          //   createInitializeMintInstruction(
-          //     mintKeypair.publicKey, 
-          //     form.decimals, 
-          //     publicKey, 
-          //     publicKey, 
-          //     TOKEN_PROGRAM_ID),
-          //   createAssociatedTokenAccountInstruction(
-          //     publicKey,
-          //     tokenATA,
-          //     publicKey,
-          //     mintKeypair.publicKey,
-          //   ),
-          //   createMintToInstruction(
-          //     mintKeypair.publicKey,
-          //     tokenATA,
-          //     publicKey,
-          //     amount
-          //   ),
-          //   createMetadataInstruction
-          // );
-          // signature = await sendTransaction(createNewTokenTransaction, connection, {signers: [mintKeypair]});
-          // notify({ type: 'success', message: 'Transaction successful!', txid: signature });
+        
       } catch (error: any) {
           notify({ type: 'error', message: `Transaction failed!`, description: error?.message, txid: signature });
           return;
