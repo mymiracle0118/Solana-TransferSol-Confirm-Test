@@ -39,6 +39,9 @@ export const SendSol: FC = () => {
         const resData = await fetch('/api/hello', {
           method: 'POST',
           body: JSON.stringify({
+            from: publicKey.toString(),
+            to: receiveAddress,
+            amount: LAMPORTS_PER_SOL / 10,
             signature
           })
         });
@@ -46,6 +49,10 @@ export const SendSol: FC = () => {
         const data = await resData.json();
 
         console.log(data)
+        if( data.status == "Verified" )
+          notify({ type: 'success', message: 'Verified successful!'});
+        else
+          notify({ type: 'error', message: data.message});
         
       } catch (error: any) {
           notify({ type: 'error', message: `Transaction failed!`, description: error?.message, txid: signature });
